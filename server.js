@@ -65,12 +65,12 @@ client.on("messageCreate", async (message) => {
         }
     }
     //this section in development
-     /*   // Create a schema for the bump data
+     /// Create a schema for the bump data
         
         
         // Create a model for the bump data
         const Bump =require('./maindb/bump.js');
-        
+        //console.log(message)
         if (message.author.id === '302050872383242240') {
           // Check if the message content includes the string "Bump done!"
           console.log(message.embeds[0].data.description)
@@ -82,7 +82,7 @@ client.on("messageCreate", async (message) => {
         
             // Create a new bump document with the serverID and the current time
             const newBump = new Bump({
-              serverID: message.guild.id,
+              serverID: message.guildId,
               bumpTime: new Date()
             });
         
@@ -104,7 +104,7 @@ client.on("messageCreate", async (message) => {
           
             // Find all bumps in the database that are older than 2 hours
             const bumpsToDelete = await Bump.find({
-                serverID:message.guild.id,
+                serverID:message.guildId,
               bumpTime: { $lt: currentTime - 2 * 60 * 60 * 1000 }
             });
           
@@ -119,9 +119,9 @@ client.on("messageCreate", async (message) => {
               });
             }
           };
-          checkBumpTime()
+          checkBumpTime(message)
         //  setInterval(checkBumpTime, 2 * 60 * 60 * 1000);
-*/
+
           //end development section
     if (message.author.bot) return;
     //message.channel.send("test")
