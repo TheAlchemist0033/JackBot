@@ -1,0 +1,43 @@
+{
+    "name": "jackbot",
+    "version": "0.0.1-beta",
+    "description": "A bot designed for CELL.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon bot.js --ignore db.json"
+    },
+    "dependencies": {
+        "@discordjs/opus": "^0.8.0",
+        "@discordjs/voice": "^0.11.0",
+        "canvas": "^2.10.2",
+        "chart.js": "^3.9.1",
+        "chartjs-node-canvas": "^4.1.6",
+        "cheerio": "^1.0.0-rc.12",
+        "discord.js": "^14.2.0",
+        "dotenv": "^16.0.3",
+        "fs": "^0.0.1-security",
+        "mathjs": "^11.0.1",
+        "mongoose": "^6.8.0",
+        "node-fetch": "^3.3.0",
+        "pastebin-ts": "^1.3.0",
+        "reaction-balancer": "^2.0.1",
+        "remove": "^0.1.5",
+        "semver": "^7.3.8",
+        "twit": "^2.2.11"
+    },
+    "engines": {
+        "node": "19.x"
+    },
+    "repository": {
+        "url": "n/a"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    },
+    "license": "MIT",
+    "keywords": [
+        "node"
+    ],
+    "type": "commonjs"
+}
