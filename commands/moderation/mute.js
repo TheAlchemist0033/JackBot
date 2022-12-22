@@ -1,11 +1,13 @@
 const Discord = require('discord.js');
 const { EmbedBuilder } = require('discord.js'); // Require the Discord.js library
+const { PermissionsBitField } = require('discord.js');
+
 module.exports = {
   name: 'mute',
   description: 'Mutes a user for a given time period.',
   usage:'+mute @user `[#{w,h,m,s}]` `[reason]`  (e.g. `1h` for 1 hour).',
   execute(client, message, args) {
-    if (!message.member.permissions.has('KICK_MEMBERS')) {
+    if (!message.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
         const embed = new EmbedBuilder()
             .setColor('#FF0000')
             .setTitle("You don't have permission to mute users!");
