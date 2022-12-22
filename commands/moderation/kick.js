@@ -6,7 +6,7 @@ module.exports = {
     usage: '+kick @user [reason]',
     async execute(client, message, args) {
         // Check if the user has the necessary permissions to kick users
-        if (!message.member.permissions.has('KICK_MEMBERS')) {
+        if (!message.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
             const embed = new EmbedBuilder()
                 .setColor('#FF0000')
                 .setTitle("You don't have permission to kick users!");
