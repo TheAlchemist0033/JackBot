@@ -6,7 +6,7 @@ module.exports = {
     usage: '+ban @user [reason]',
     async execute(client, message, args) {
         // Check if the user has the necessary permissions to ban users
-        if (!message.member.permissions.has('BAN_MEMBERS')) {
+        if (!message.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
             return message.channel.send(new EmbedBuilder()
                 .setColor('#FF0000')
                 .setTitle("You don't have permission to ban users!"));
