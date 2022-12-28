@@ -79,21 +79,37 @@ client.on("messageCreate", async (message) => {
           }
           if (message.content.includes('Bump done!')) {
             console.log("Successful bump detected!");
-        
+            var bumpmess = await message.channel.send("Bump was successful! type 'Claim' to claim the bump.");
+            const filter = m => m.content.toLowerCase().includes('claim');
+            const collector = message.channel.createMessageCollector({ filter, time: 10000 });
+            var colc = 0
+            collector.on('collect', m => {
+                colc +=1;
+                if (colc <=1){
+                    console.log(`Collected ${m.content}`);
+                    const newBump = new Bump({
+                        serverID: message.guildId,
+                        bumpTime: new Date(),
+                        userID: message.author.id
+                      });
+                  
+                      // Save the new bump document to the database
+                      newBump.save((error) => {
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
+                        }
+                      });
+                }
+            });
+            
+            collector.on('end', collected => {
+                console.log(`Collected ${collected.size} items`);
+            });
+            
             // Create a new bump document with the serverID and the current time
-            const newBump = new Bump({
-              serverID: message.guildId,
-              bumpTime: new Date()
-            });
-        
-            // Save the new bump document to the database
-            newBump.save((error) => {
-              if (error) {
-                console.log(error);
-              } else {
-                console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
-              }
-            });
+
           }
         }
         
