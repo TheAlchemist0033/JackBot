@@ -8,6 +8,7 @@ module.exports = {
     async execute(client, message, args) {
         let balance = require('reaction-balancer');
 
+        if(!args[0]) return message.channel.send("Please follow the format: H2 + O2 = H2O.");
 
         const reaction = args.join('');
         const parsedReaction = parseReaction(reaction);
