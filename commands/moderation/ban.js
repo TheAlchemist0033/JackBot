@@ -8,16 +8,18 @@ module.exports = {
     async execute(client, message, args) {
         // Check if the user has the necessary permissions to ban users
         if (!message.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
-            return message.channel.send(new EmbedBuilder()
-                .setColor('#FF0000')
-                .setTitle("You don't have permission to ban users!"));
+            let embed = new EmbedBuilder()
+            .setColor('#FF0000')
+            .setTitle("You don't have permission to ban users!");
+            return message.channel.send({embeds:[embed]})
         }
 
         // Check if a user mention was provided
         if (!message.mentions.users.size) {
-            return message.channel.send(new EmbedBuilder()
-                .setColor('#FF0000')
-                .setTitle("You need to specify a user to ban!"));
+            let embed = new EmbedBuilder()
+            .setColor('#FF0000')
+            .setTitle("You need to specify a user to ban!");
+            return message.channel.send({embeds:[embed]})
         }
 
         // Get the mentioned user
@@ -25,7 +27,7 @@ module.exports = {
 
         // Check if the user can be banned (e.g. they are not an admin or have a higher role than the user issuing the command)
         if (!bannedUser || !bannedUser.bannable) {
-            const embed = new EmbedBuilder()
+            let embed = new EmbedBuilder()
             .setColor('#FF0000')
             .setTitle("That user cannot be banned!");
             return message.channel.send({embeds:[embed]});
