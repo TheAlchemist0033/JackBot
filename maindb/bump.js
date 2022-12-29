@@ -15,3 +15,5 @@ const bumpSchema = new mongoose.Schema({
   });
 const Bump = mongoose.model('Bump', bumpSchema);
 module.exports = Bump;
+
+
