@@ -77,7 +77,7 @@ client.on("messageCreate", async (message) => {
           if(message.embeds[0].data.description.includes("DISBOARD")){
               message.channel.send("I was able to detect the content of Disboards embed. I can detect successful bumps.")
           }
-          if (message.content.includes('Bump done!')) {
+          if (message.embeds[0].data.description.includes('Bump done!')) {
             console.log("Successful bump detected!");
             var bumpmess = await message.channel.send("Bump was successful! type 'Claim' to claim the bump.");
             const filter = m => m.content.toLowerCase().includes('claim');
