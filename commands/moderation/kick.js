@@ -1,5 +1,5 @@
 const { EmbedBuilder, Embed } = require('discord.js');
-
+const { PermissionsBitField } = require('discord.js');
 module.exports = {
     name: 'kick',
     description: 'Kicks a specified user from the server.',
