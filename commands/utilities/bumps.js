@@ -37,6 +37,7 @@ module.exports = {
                 .addFields(
                   {name:"ServerID",value:res.serverID},
                   {name:"userID",value:res.userID},
+                  {name:"User",value:`${message.author.username}#${message.author.discriminator}`},
                   {name:"Bumps: ",value:res.counts.toString()
                 })
                 .setColor('#0099ff');
