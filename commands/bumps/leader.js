@@ -13,7 +13,7 @@ module.exports = {
         if (bumps.length === 0) {
           return message.channel.send('No bumps found');
         }
-        let buser = client.members.cache.get(bump.userID);
+        let buser = message.client.users.cache.get(bump.userID);
         console.log(buser);
         const leaderboardEmbed = new EmbedBuilder()
           .setTitle('Leaderboard')
