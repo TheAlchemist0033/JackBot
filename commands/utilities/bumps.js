@@ -24,7 +24,8 @@ module.exports = {
                   .setTitle('User Bumps')
                   .addFields(
                     {name:"ServerID",value:message.guildId},
-                    {name:"userID",value:message.author.id},
+                    {name:"UserID",value:message.author.id},
+                    {name:"User",value:message.author.username +"#"+ message.author.discriminator},
                     {name:"Bumps: ",value:"0"})
                   .setColor('#0099ff');
                   message.channel.send({embeds:[embed]})
