@@ -30,6 +30,8 @@ module.exports = {
                   .setColor('#0099ff');
                   message.channel.send({embeds:[embed]})
             }else{
+                console.log(res)
+                message.channel.send("Logging data")
                 const embed =  new EmbedBuilder()
                 .setTitle('User Bumps')
                 .addFields(
