@@ -19,10 +19,11 @@ module.exports = {
                     userID:message.author.id,
                     counts:0
                   });
+                  newBump.save().catch(err=> console.log(err));
                   const embed =  new EmbedBuilder()
                   .setTitle('User Bumps')
                   .addFields(
-                    {name:"ServerID",value:message.guildID},
+                    {name:"ServerID",value:message.guildId},
                     {name:"userID",value:message.author.id},
                     {name:"Bumps: ",value:"0"})
                   .setColor('#0099ff');
@@ -33,7 +34,8 @@ module.exports = {
                 .addFields(
                   {name:"ServerID",value:res.ServerID},
                   {name:"userID",value:res.userID},
-                  {name:"Bumps: ",value:res.counts.toString()})
+                  {name:"Bumps: ",value:res.counts.toString()
+                })
                 .setColor('#0099ff');
                 res.save().catch(err=>console.log(err));
             }

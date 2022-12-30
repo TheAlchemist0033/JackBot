@@ -90,23 +90,24 @@ client.on("messageCreate", async (message) => {
                     console.log(`Collected ${m.content}`);
                     
                     uBump.findOne({
-                        userID:message.author.id,
+                        userID:m.author.id,
                         serverID:message.guildId
                     }, (error, res) => {
                         if (error) {
                             console.log(error);
                         } else if (!res) {
                             const newBump = new uBump({
-                                serverID: message.guildId,
-                                userID:message.author.id,
+                                serverID: m.guildId,
+                                userID:m.author.id,
                                 counts:1
                               });
-                              message.channel.send("Ive updated the bump count for " + `${message.author.username}#${message.author.discriminator} to 1! Congrats on your first bump.`);
+                              newBump.save().catch(err=> console.log(err));
+                              message.channel.send("Ive updated the bump count for " + `${m.author.username}#${m.author.discriminator} to 1! Congrats on your first bump.`);
                     
                         }else{
                             res.counts += 1;
                             res.save().catch(err=>console.log(err));
-                            message.channel.send("Ive updated the bump count for " + `${message.author.username}#${message.author.discriminator} to ${res.counts}`);
+                            message.channel.send("Ive updated the bump count for " + `${m.author.username}#${m.author.discriminator} to ${res.counts}`);
                     
                         }
                     })
