@@ -41,7 +41,9 @@ module.exports = {
                 })
                 .setColor('#0099ff');
                 res.save().catch(err=>console.log(err));
+                message.channel.send({embeds:[embed]});
             }
+
         })
     },
 };
