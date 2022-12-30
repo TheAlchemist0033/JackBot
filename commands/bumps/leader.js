@@ -18,7 +18,7 @@ module.exports = {
           .setTitle('Leaderboard')
           .setColor('#0099ff');
         bumps.forEach((bump, index) => {
-            let buser = message.client.users.cache.get(bumps.userID);
+            let buser = message.client.users.fetch(bumps.userID);
             console.log(buser);
             leaderboardEmbed.addFields({name:`${index + 1}. ${buser.username}#${buser.discriminator}`,value:`Counts: ${bump.counts}`});
         });
