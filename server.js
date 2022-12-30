@@ -70,6 +70,7 @@ client.on("messageCreate", async (message) => {
         
         // Create a model for the bump data
         const Bump =require('./maindb/bump.js');
+        const uBump = require('./maindb/ubump.js');
         //console.log(message)
         if (message.author.id === '302050872383242240') {
           // Check if the message content includes the string "Bump done!"
@@ -87,10 +88,26 @@ client.on("messageCreate", async (message) => {
                 colc +=1;
                 if (colc <=1){
                     console.log(`Collected ${m.content}`);
+                    uBump.findOne({
+                        userID:message.author.id,
+                        serverID:message.guildId
+                    }, (error, res) => {
+                        if (error) {
+                            console.log(error);
+                        } else if (!res) {
+                            const newBump = new uBump({
+                                serverID: message.guildId,
+                                userID:message.author.id,
+                                counts:1
+                              });
+                        }else{
+                            res.counts += 1;
+                            res.save().catch(err=>console.log(err));
+                        }
+                    })
                     const newBump = new Bump({
                         serverID: message.guildId,
-                        bumpTime: new Date(),
-                        userID: message.author.id
+                        bumpTime: new Date()
                       });
                   
                       // Save the new bump document to the database
