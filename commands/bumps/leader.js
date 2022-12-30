@@ -17,8 +17,8 @@ module.exports = {
         const leaderboardEmbed = new EmbedBuilder()
           .setTitle('Leaderboard')
           .setColor('#0099ff');
-        bumps.forEach((bump, index) => {
-            let buser = message.client.users.fetch(bump.userID);
+        bumps.forEach(async (bump, index) => {
+            let buser = await message.client.users.fetch(bump.userID);
             console.log(buser);
             leaderboardEmbed.addFields({name:`${index + 1}. ${buser.username}#${buser.discriminator}`,value:`Counts: ${bump.counts}`});
         });
