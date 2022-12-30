@@ -1,5 +1,5 @@
 const math = require('mathjs');
-const uBump = require('./maindb/ubump.js');
+const uBump = require('../../maindb/ubump.js');
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
