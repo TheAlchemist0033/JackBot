@@ -1,6 +1,6 @@
 const discord = require('discord.js');
 const Bump = require('../../maindb/ubump.js'); // assuming the Bump model is in a file called bumpModel.js in the same directory as this file
-
+const { EmbedBuilder } = require('discord.js');
 module.exports = {
   name: 'leader',
   description: 'Displays the top 10 users sorted by counts',
@@ -13,13 +13,13 @@ module.exports = {
         if (bumps.length === 0) {
           return message.channel.send('No bumps found');
         }
-        const leaderboardEmbed = new discord.MessageEmbed()
+        const leaderboardEmbed = new EmbedBuilder()
           .setTitle('Leaderboard')
           .setColor('#0099ff');
         bumps.forEach((bump, index) => {
-          leaderboardEmbed.addField(`${index + 1}. ${bump.userID}`, `Counts: ${bump.counts}`);
+          leaderboardEmbed.addFields({name:`${index + 1}. ${bump.userID}`,value:`Counts: ${bump.counts}`});
         });
-        message.channel.send(leaderboardEmbed);
+        message.channel.send({embeds:[leaderboardEmbed]});
       })
       .catch((err) => {
         console.error(err);
