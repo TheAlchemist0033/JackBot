@@ -11,7 +11,7 @@ const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent]
 });
 const mongoose = require("mongoose");
-const url = "mongodb://127.0.0.1:27017";
+const url = process.env.MONURL //"mongodb://127.0.0.1:27017";
 try{
     mongoose.connect(
         url,{
