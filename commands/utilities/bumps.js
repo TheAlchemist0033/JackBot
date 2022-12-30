@@ -35,7 +35,7 @@ module.exports = {
                 const embed =  new EmbedBuilder()
                 .setTitle('User Bumps')
                 .addFields(
-                  {name:"ServerID",value:res.ServerID},
+                  {name:"ServerID",value:res.serverID},
                   {name:"userID",value:res.userID},
                   {name:"Bumps: ",value:res.counts.toString()
                 })
