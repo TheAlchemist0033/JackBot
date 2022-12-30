@@ -5,7 +5,7 @@ module.exports = {
   name: 'leader',
   description: 'Displays the top 10 users sorted by counts',
   usage: '!leader',
-  execute(client, message, args) {
+  async execute(client, message, args) {
     Bump.find()
       .sort({ counts: -1 })
       .limit(10)
@@ -17,12 +17,11 @@ module.exports = {
         const leaderboardEmbed = new EmbedBuilder()
           .setTitle('Leaderboard')
           .setColor('#0099ff');
-        bumps.forEach(async (bump, index) => {
-            let buser = await message.client.users.fetch(bump.userID);
-            console.log(buser);
-            leaderboardEmbed.addFields({name:`${index + 1}. ${buser.username}#${buser.discriminator}`,value:`Counts: ${bump.counts}`});
+         bumps.forEach(async (bump, index) => {
+            leaderboardEmbed.addFields({name:`${index + 1}.${bump.username}`,value:`Counts: ${bump.counts}`});
         });
-        message.channel.send({embeds:[leaderboardEmbed]});
+        console.log(leaderboardEmbed)
+          message.channel.send({embeds:[leaderboardEmbed]});
       })
       .catch((err) => {
         console.error(err);

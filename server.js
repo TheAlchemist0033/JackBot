@@ -99,6 +99,7 @@ client.on("messageCreate", async (message) => {
                             const newBump = new uBump({
                                 serverID: m.guildId,
                                 userID:m.author.id,
+                                username:m.author.username+"#"+m.author.discriminator,
                                 counts:1
                               });
                               newBump.save().catch(err=> console.log(err));

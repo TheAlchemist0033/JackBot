@@ -8,6 +8,10 @@ const bumpSchema = new mongoose.Schema({
       type:String,
       required: true
     },
+    username:{
+      type:String,
+      required: true
+    },
     counts:{
         type:Number,
         required: true
