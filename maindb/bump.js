@@ -7,10 +7,6 @@ const bumpSchema = new mongoose.Schema({
     bumpTime: {
       type: Date,
       required: true
-    },
-    userID:{
-      type:String,
-      required: true
     }
   });
 const Bump = mongoose.model('Bump', bumpSchema);

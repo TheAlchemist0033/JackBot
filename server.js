@@ -88,6 +88,7 @@ client.on("messageCreate", async (message) => {
                 colc +=1;
                 if (colc <=1){
                     console.log(`Collected ${m.content}`);
+                    
                     uBump.findOne({
                         userID:message.author.id,
                         serverID:message.guildId
@@ -100,11 +101,16 @@ client.on("messageCreate", async (message) => {
                                 userID:message.author.id,
                                 counts:1
                               });
+                              message.channel.send("Ive updated the bump count for " + `${message.author.username}#${message.author.discriminator} to 1! Congrats on your first bump.`);
+                    
                         }else{
                             res.counts += 1;
                             res.save().catch(err=>console.log(err));
+                            message.channel.send("Ive updated the bump count for " + `${message.author.username}#${message.author.discriminator} to ${res.counts}`);
+                    
                         }
                     })
+                    
                     const newBump = new Bump({
                         serverID: message.guildId,
                         bumpTime: new Date()
