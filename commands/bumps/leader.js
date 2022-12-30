@@ -18,7 +18,7 @@ module.exports = {
           .setTitle('Leaderboard')
           .setColor('#0099ff');
          bumps.forEach(async (bump, index) => {
-            leaderboardEmbed.addFields({name:`${index + 1}.${bump.username}`,value:`Counts: ${bump.counts}`});
+            leaderboardEmbed.addFields({name:`${index + 1}. ${bump.username}`,value:`Bumps: ${bump.counts}`});
         });
         console.log(leaderboardEmbed)
           message.channel.send({embeds:[leaderboardEmbed]});
