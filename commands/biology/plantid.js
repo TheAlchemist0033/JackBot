@@ -52,11 +52,15 @@ module.exports = {
                     console.log(body)
                     body.suggestions.forEach(async (suggestion, index) => {
                         const image = await getWikipediaImage(suggestion.plant_details.url);
-                        const imageUrl = "https:" + image.toString();
+                        if(image) {
+                            const imageUrl = "https:" + image.toString();
+                        }
                         const embed = new EmbedBuilder()
                             .setTitle(`${suggestion.plant_name}`)
                             .setDescription(`Common Names: ${suggestion.plant_details.common_names}\nUrl: ${suggestion.plant_details.url}\nProbability: ${suggestion.probability*100}%`)
-                            .setImage(imageUrl)
+                            if(image){
+                                embed.setImage(imageUrl)
+                            }
 
                         if (index === 0) {
                             // Edit the tempmessage for the first suggestion
