@@ -10,15 +10,15 @@ module.exports = {
     const Balance = require('../../maindb/bal.js');
 
     // Find the user's balance in the database
-    const balance = await Balance.findOne({ userId: message.author.id });
+    const balance = await Balance.findOne({ userID: message.author.id ,serverID:message.guildId});
 
     // If the user doesn't have a balance, create one with a starting balance of 100
     if (!balance) {
-      balance = new Balance({
+      ball = new Balance({
         userId: message.author.id,
         balance: 100
       });
-      await balance.save();
+      await ball.save();
     }
 
     // Send a message with the user's balance
