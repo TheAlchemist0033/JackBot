@@ -17,6 +17,7 @@ module.exports = {
       if (!res) {
         ball = new Balance({
           userID: message.author.id,
+          serverID:message.guildId,
           username: `${message.author.username}#${message.author.discriminator}`,
           balance: 0,
           inventory: {},
@@ -25,6 +26,20 @@ module.exports = {
       }
 
       // Check if the user has a fishing pole in their inventory
+      if(!res.inventory){
+        Balance.updateOne({
+            userID:message.author.id,
+            serverID:message.guildId
+
+        }, {
+            $set: {
+               inventory:{}
+            }
+        }, function(err, res) {
+            if (err) return console.log(err);
+            console.log("items updated");
+        });
+      }
       const hasFishingPole = 'microteleporter' in res.inventory;
       if (!hasFishingPole) {
         return message.channel.send(
