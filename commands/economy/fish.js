@@ -25,7 +25,7 @@ module.exports = {
       }
 
       // Check if the user has a fishing pole in their inventory
-      const hasFishingPole = 'microteleporter' in res.items;
+      const hasFishingPole = 'microteleporter' in res.inventory;
       if (!hasFishingPole) {
         return message.channel.send(
           "You don't have a fishing pole! You can't fish without one."
