@@ -1,7 +1,7 @@
 require('dotenv').config({path: "./.env"});
 const Discord = require('discord.js');
 const fs = require("fs");
-const math = require({mathjs})
+const math = require("mathjs");
 const {Client,GatewayIntentBits}=require('discord.js');
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
 const mongoose = require("mongoose");
