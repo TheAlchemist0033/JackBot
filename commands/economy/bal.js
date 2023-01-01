@@ -7,11 +7,7 @@ module.exports = {
   usage:'+bal',
   async execute(client,message,args) {
     // Set up a Mongoose model for the user balances
-    const balanceSchema = new mongoose.Schema({
-      userId: String,
-      balance: Number
-    });
-    const Balance = mongoose.model('Balance', balanceSchema);
+    const Balance = require('../../maindb/bal.js');
 
     // Find the user's balance in the database
     const balance = await Balance.findOne({ userId: message.author.id });
