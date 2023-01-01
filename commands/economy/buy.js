@@ -20,7 +20,7 @@ module.exports = {
     }
     const item = args[0].toLowerCase();
     // Check if the item is available for purchase
-    shop.findOne({exists:1},async (err,res)=>{
+    Shop.findOne({exists:1},async (err,res)=>{
 
       if(err){
           message.channel.send("I've encountered an error when searching for the shop inventory.");
@@ -38,7 +38,7 @@ module.exports = {
   // Check the cost of the item
   var cost = res.stock[item].cost;
   // Find the user's balance in the database
-  balance = await balance.findOne({ userID: message.author.id ,serverID:message.guildId});
+  balance = await Balance.findOne({ userID: message.author.id ,serverID:message.guildId});
 
   // If the user doesn't have a balance, create one with a starting balance of 100
   if (!balance) {
