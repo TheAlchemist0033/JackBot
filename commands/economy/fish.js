@@ -58,42 +58,29 @@ module.exports = {
 
       // Generate a random number between 0 and 1
       const chance = Math.random();
-
-      // Set up an object of possible fish to catch
-      const fish = {
-        zingledorp: {
-          count:1,
-          value: 10,
-        },
-        morthelrop: {
-          count:1,
-          value: 20,
-        },
-        beezingozar: {
-          count:1,
-          value: 30,
-        },
-        kloomkloom: {
-            count:1,
-            value: 40,
-        },
-      };
+                 // Set up an object of possible fish to catch
+      const fish = [
+        "zingledorp",
+        "morthelrop",
+        "beezingozar",
+        "kloomkloom"
+    ];
 
       // Catch a fish if the random number is greater than 0.7
       if (chance > 0.7) {
         // Generate a random index for the fish object
-        const keys = Object.keys(fish);
-        const index = Math.floor(Math.random() * keys.length);
+        const index = Math.floor(Math.random() * fish.length);
 
         // Get the fish at the random index
-        const caughtFish = keys[index];
+        const caughtFish = fish[index];
 
         // Add the fish to the user's inventory
+        if(!res.inventory[fish[index]]){
         await Balance.findOneAndUpdate(
           { userID: message.author.id },
           {
             $set: {
-              [`inventory.${caughtFish}`]: fish[caughtFish],
+              ['inventory.'+caughtFish]: 1
             },$set:{fishcool:new Date().getTime()+180000}
           }
         );
@@ -104,7 +91,11 @@ module.exports = {
             fish[caughtFish].value
           } Zhmorgles (ZML)!`
         );
-      } else {
+        }else{
+            res.inventory[fish[index]] += 1;
+            res.save().catch(err => console.log(err));
+        }
+    } else {
         // Send a message to the channel if the user didn't catch a fish
         await Balance.findOneAndUpdate(
             { userID: message.author.id },
