@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { e } = require('mathjs');
 const mongoose = require('mongoose');
 
 module.exports = {
@@ -91,15 +92,9 @@ module.exports = {
           {
             $set: {
               [`items.${caughtFish}`]: fish[caughtFish],
-            },
+            },$set:{fishcool:new Date().getTime()+180000}
           }
         );
-        await Balance.findOneAndUpdate({
-            userID:message.author.id,
-            serverID:message.guildId
-        },{$set:{
-            fishcool:new Date().getTime()+180000
-        }})
 
         // Send a message to the channel
         message.channel.send(
@@ -109,7 +104,16 @@ module.exports = {
         );
       } else {
         // Send a message to the channel if the user didn't catch a fish
+        await Balance.findOneAndUpdate(
+            { userID: message.author.id },
+            {
+              $set: {
+                fishcool:new Date().getTime() + 18000,
+              }
+            }
+          );
         message.channel.send("You didn't catch any fish this time. Better luck next time!");
+        
       }
     }
                 
