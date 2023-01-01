@@ -7,7 +7,7 @@ module.exports = {
   usage:'+shopadd',
   async execute(client,message,args) {
     // Set up a Mongoose model for the user balances
-    if(message.author.id=="1058923942162726994"){
+    if(message.author.id=="608802993810440223"){
     // Find the user's balance in the database
     const shop = require('../../maindb/shop.js');
     shop.findOne({ shop:{exists:1 }},(err,res)=>{
