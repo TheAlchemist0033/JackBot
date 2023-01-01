@@ -26,6 +26,7 @@ module.exports = {
         await ball.save().catch((err) => console.log(err));
       }else{
         if(res.fishcool){
+            console.log(res.fishcool - new Date().getTime())
             if(!res.fishcool > new Date().getTime() ){
                 return message.channel.send("You need to wait 3 minutes between teleportation attempts.")
             }
