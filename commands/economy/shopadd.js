@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const mongoose = require('mongoose');
-const {EmbedBuilder} = require('discord.js');
+const {
+    EmbedBuilder
+} = require('discord.js');
 module.exports = {
     name: 'shopadd',
     description: 'Can only be used by the bot owner.',
@@ -51,23 +53,30 @@ module.exports = {
                     if (!args[0] || !args[1] || !args[2]) {
                         return message.channel.send("You must specify an item name, cost, and usage in that order.");
                     }
-                shop.updateOne({exists:1}, { $set: {
-                        [args[0]]:{
-                            cost:args[1],
-                            usage:args.slice(2).join(" ") 
-                        } }, function(err, res) {
-                            if(err) return console.log(err);
-                            message.channel.send("No shop found, configuring new shop data.");
-
+                    shop.updateOne({
+                        exists: 1
+                    }, {
+                        $set: {
+                            ["stock." + args[0]]: {
+                                cost: args[1],
+                                usage: args.slice(2).join(" ")
+                            }
+                        }
+                    }, function(err, res) {
+                        if (err) return console.log(err);
+                        message.channel.send("Shop updated");
+                    });
+                    const embed = new EmbedBuilder()
+                        .setTitle("Shop Entry")
+                        .addFields({
+                            name: `${args[0]}: ${args[1]} ZML`,
+                            value: args.slice(2).join(" ")
+                        })
+                    message.channel.send({
+                        embeds: [embed]
+                    });
                 }
-               
             });
-            const embed = new EmbedBuilder()
-            .setTitle("Shop Entry")
-            .addFields({name:`${args[0]}: ${args[1]} ZML`,value:args.slice(2).join(" ")})
-            message.channel.send({embeds:[embed]});
-        }
-    });
 
         } else {
             return message.channel.send("You are not authorized to do this.")
