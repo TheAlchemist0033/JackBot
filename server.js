@@ -184,7 +184,7 @@ client.on("messageCreate", async (message) => {
         if(err) return console.log(err);
         if(res){
             var timenow = new Date();
-            if((timenow-res.cooldown) > (10*60*1000)){
+            if((timenow-res.cooldown) > (10*1000)){
 
             var casham = math.ceil(math.random()*15); 
             res.balance+= casham;
