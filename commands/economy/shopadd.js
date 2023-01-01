@@ -11,9 +11,7 @@ module.exports = {
             // Find the user's balance in the database
             const shop = require('../../maindb/shop.js');
             shop.findOne({
-                shop: {
-                    exists: 1
-                }
+                exists: 1
             }, (err, res) => {
                 if (err) {
                     message.channel.send("There was an error pulling the data.");
@@ -44,8 +42,7 @@ module.exports = {
                     */
 
                     TShop = new shop({
-                        exists: 1,
-                        stock: {}
+                        exists: 1
                     });
                     TShop.save().catch(err => console.log(err));
                     message.channel.send("Shop did not exist, run command again as shop has now been initialized.");
@@ -54,16 +51,17 @@ module.exports = {
                     if (!args[0] || !args[1] || !args[2]) {
                         return message.channel.send("You must specify an item name, cost, and usage in that order.");
                     }
-                    slice = args.slice(2);
-                    res.stock[args[0]].cost = parseInt(args[1]);
-                    res.stock[args[0]].usage = slice.join(" ");
-                    res.save().catch(err => {
-                        console.log(err);
-                    })
+                    collection.updateOne({exists:1}, { $set: {
+                        [args[0]]:{
+                            cost:args[1],
+                            usage:args.slice(2) 
+                        } }, function(err, res) {
                     message.channel.send("No shop found, configuring new shop data.");
 
                 }
             });
+        }
+    });
 
         } else {
             return message.channel.send("You are not authorized to do this.")
