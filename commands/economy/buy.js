@@ -41,7 +41,8 @@ module.exports = {
     // If the user doesn't have a balance, create one with a starting balance of 100
     if (!balance) {
       balance = new Balance({
-        userId: message.author.id,
+        userID: message.author.id,
+        serverID:message.guildId,
         balance: 100
       });
       await balance.save();

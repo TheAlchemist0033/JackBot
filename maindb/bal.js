@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const balanceSchema = new mongoose.Schema({
-    userId: String,
+    userID: String,
+    serverID:String,
     balance: Number,
     inventory:{type:mongoose.Schema.Types.Mixed},
   });

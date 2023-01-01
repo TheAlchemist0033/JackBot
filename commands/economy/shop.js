@@ -9,7 +9,6 @@ module.exports = {
   usage:'+shop',
   async execute(client,message, args) {
     // Set up a Mongoose model for the user balances
-    const Balance = require("../../maindb/bal.js");
     const Shop = require("../../maindb/shop.js");
 
     // Check if the user has specified an item to purchase
@@ -17,7 +16,7 @@ module.exports = {
     //const item = args[0];
 
     // Check if the item is available for purchase
-    shop.findOne({exists:1},async (err,res)=>{
+    Shop.findOne({exists:1},async (err,res)=>{
 
         if(err){
             message.channel.send("I've encountered an error when searching for the shop inventory.");
