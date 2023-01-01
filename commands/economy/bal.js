@@ -22,8 +22,9 @@ module.exports = {
                 ball = new Balance({
                     userID: message.author.id,
                     serverID:message.guildId,
-                    usename:message.author.username+"#"+message.author.discriminator,
-                    balance: 100
+                    usename:`${message.author.username}#${message.author.discriminator}`,
+                    balance: 100,
+                    cooldown:new Date()
                 });
                 await ball.save().catch(err=> console.log(err));
                 message.channel.send(`Your balance is 100 Zhmorgles (ZML).`);
