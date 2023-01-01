@@ -45,6 +45,7 @@ module.exports = {
         serverID:message.guildId,
         username:message.author.username+"#"+message.author.discriminator,
         balance: 100,
+        inventory:{},
         cooldown:new Date().getTime()
       });
       await balance.save();
@@ -61,12 +62,13 @@ module.exports = {
 
     if(balance.inventory[item]){
         balance.inventory[item] += 1;
+       // balance.save().catch(err=>console.log(err));
     }else{
           balance.updateOne({ userID: message.author.id,serverID:message.guildId }, { inventory:{[item]:1} }, function(err, res) {
             console.log(err);
           });
     }
-    await balance.save();
+    await balance.save().catch(err=>console.log(err));
     // Send a message confirming the purchase
     message.channel.send(`You have purchased ${item} for ${cost} Zhmorgles. Your balance is now ${balance.balance} ZML.`);
 
