@@ -185,14 +185,17 @@ client.on("messageCreate", async (message) => {
         if (err) return console.log(err);
         if (res) {
             var timenow = new Date().getTime();
-            if ((timenow - res.cooldown) > (10 * 1000)) {
+            let cooled = timenow-res.cooldown;
+
+            if (cooled > 20000){
 
                 var casham = math.ceil(math.random() * 15);
                 console.log(casham)
-                res.balance += casham;
+                res.balance =  parseInt(res.balance + casham);
                 res.cooldown = new Date().getTime()
+                console.log(res.cooldown)
             }
-            console.log(res.cooldown)
+
         } else {
             console.log(message.author.username + "#" + message.author.discriminator);
             const usernamestring = `${message.author.username}#${message.author.discriminator}`
