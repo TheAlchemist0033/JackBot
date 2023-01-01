@@ -38,9 +38,10 @@ module.exports = {
                 .setTitle("Shop Inventory")
                 console.log(res.stock);
             for(const key in res.stock){
-                console.log(key + " " + key.cost + ": " + key.usage);
-                embed.addFields({name:`${key}: ${key.cost} ZML`,value:key.usage});
+               // console.log(key + " " + res.stock[key].cost + ": " + res.stock[key].usage);
+                embed.addFields({name:`${key}: ${res.stock[key].cost} ZML`,value:res.stock[key].usage});
             }
+          
             message.channel.send({embeds:[embed]});
     }
 })
