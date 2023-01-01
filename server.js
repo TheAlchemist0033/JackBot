@@ -1,17 +1,9 @@
-require('dotenv').config({
-    path: "./.env"
-});
+require('dotenv').config({path: "./.env"});
 const Discord = require('discord.js');
 const fs = require("fs");
-
-const {
-    Client,
-    GatewayIntentBits,
-    ApplicationCommandOptionWithChoicesAndAutocompleteMixin
-} = require('discord.js');
-const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
-});
+const math = require({mathjs})
+const {Client,GatewayIntentBits}=require('discord.js');
+const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
 const mongoose = require("mongoose");
 const url = process.env.MONURL //"mongodb://127.0.0.1:27017";
 try {
