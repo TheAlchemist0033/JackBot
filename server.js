@@ -104,7 +104,7 @@ client.on("messageCreate", async (message) => {
                     
                         }else{
                             res.counts += 1;
-                            res.save().catch(err=>console.log(err));
+                            //res.save().catch(err=>console.log(err));
                             message.channel.send("Ive updated the bump count for " + `${m.author.username}#${m.author.discriminator} to ${res.counts}`);
                     
                         }
@@ -128,7 +128,7 @@ client.on("messageCreate", async (message) => {
                               });
                         }else{
                             res.BumpTime = new Date();
-                            res.save().catch(err=>console.log(err));
+                            //res.save().catch(err=>console.log(err));
                             console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
                         }
                     });
