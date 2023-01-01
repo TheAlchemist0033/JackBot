@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const mongoose = require('mongoose');
 const shop = require('../../maindb/shop.js');
-const {EmbedBuilder} = require("discor.js");
+const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
   name: 'shop',
