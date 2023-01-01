@@ -25,11 +25,11 @@ module.exports = {
                     balance: 100
                 });
                 await ball.save().catch(err=> console.log(err));
-                message.channel.send(`Your balance is 100 ZML.`);
+                message.channel.send(`Your balance is 100 Zhmorgles (ZML).`);
             } else {
 
                 // Send a message with the user's balance
-                message.channel.send(`Your balance is ${res.balance} ZML.`);
+                message.channel.send(`Your balance is ${res.balance} Zhmorgles (ZML).`);
             }
         })
     },
