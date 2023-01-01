@@ -191,7 +191,7 @@ client.on("messageCreate", async (message) => {
                 res.balance += casham;
                 res.cooldown = new Date()
             }
-            console.log(timenow - res.cooldown)
+            console.log(res.cooldown)
         } else {
             console.log(message.author.username + "#" + message.author.discriminator);
             const usernamestring = `${message.author.username}#${message.author.discriminator}`
