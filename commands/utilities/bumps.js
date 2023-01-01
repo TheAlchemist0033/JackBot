@@ -5,6 +5,7 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
     name: 'bumps',
     description: 'Displays user bumps',
+    usage:'+bumps',
     execute(client, message, args) {
         // If no arguments are supplied, send a message to the channel
         uBump.findOne({

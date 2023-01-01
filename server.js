@@ -75,16 +75,13 @@ client.on("messageCreate", async (message) => {
         if (message.author.id === '302050872383242240') {
           // Check if the message content includes the string "Bump done!"
           console.log(message.embeds[0].data.description)
-          if(message.embeds[0].data.description.includes("DISBOARD")){
-              message.channel.send("I was able to detect the content of Disboards embed. I can detect successful bumps.")
-          }
           if (message.embeds[0].data.description.includes('Bump done!')) {
             console.log("Successful bump detected!");
             var bumpmess = await message.channel.send("Bump was successful! type 'Claim' to claim the bump.");
             const filter = m => m.content.toLowerCase().includes('claim');
             const collector = message.channel.createMessageCollector({ filter, time: 10000 });
             var colc = 0
-            collector.on('collect', m => {
+            collector.on('collect', async m => {
                 colc +=1;
                 if (colc <=1){
                     console.log(`Collected ${m.content}`);
@@ -112,20 +109,34 @@ client.on("messageCreate", async (message) => {
                     
                         }
                     })
+                    Bump.find({
+                        serverID:message.guildId
+                    },(error,res)=>{
+                        if(error){
+                            console.log(error);
+                        }else if(!res){
+                            const newBump = new Bump({
+                                serverID: message.guildId,
+                                bumpTime: new Date()
+                              });
+                              newBump.save((error) => {
+                                if (error) {
+                                  console.log(error);
+                                } else {
+                                  console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
+                                }
+                              });
+                        }else{
+                            res.BumpTime = new Date();
+                            res.save().catch(err=>console.log(err));
+                            console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
+                        }
+                    });
                     
-                    const newBump = new Bump({
-                        serverID: message.guildId,
-                        bumpTime: new Date()
-                      });
+
                   
                       // Save the new bump document to the database
-                      newBump.save((error) => {
-                        if (error) {
-                          console.log(error);
-                        } else {
-                          console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
-                        }
-                      });
+
                 }
             });
             
@@ -155,9 +166,9 @@ client.on("messageCreate", async (message) => {
               message.channel.send('There are bumps that are older than 2 hours!');
           
               // Loop through the bumps to delete and delete them from the database
-              bumpsToDelete.forEach(async (bump) => {
+             /* bumpsToDelete.forEach(async (bump) => {
                 await Bump.deleteOne({ _id: bump._id });
-              });
+              });*/
             }
           };
           checkBumpTime(message)
@@ -198,5 +209,7 @@ client.on("messageCreate", async (message) => {
     console.log("success")
     await cmd.execute(client, message, args);
 });
+
+  
 
 client.login(process.env.BOT_TOKEN)

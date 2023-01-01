@@ -1,6 +1,6 @@
 {
     "name": "jackbot",
-    "version": "0.0.1-beta",
+    "version": "0.0.3-beta",
     "description": "A bot designed for CELL.",
     "main": "server.js",
     "scripts": {
