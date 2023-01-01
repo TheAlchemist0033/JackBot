@@ -28,7 +28,8 @@ module.exports = {
         if(res.fishcool){
             console.log(res.fishcool - new Date().getTime())
             if(!(res.fishcool > new Date().getTime()) ){
-                return message.channel.send("You need to wait 3 minutes between teleportation attempts.")
+                return message.channel.send(`You need to wait 3 minutes between teleportation attempts. Time remaining: ${(res.cooldown - new Date().getTime()) /
+                1000} seconds`);
             }
         }
 
