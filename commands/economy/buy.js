@@ -64,7 +64,9 @@ module.exports = {
         balance.inventory[item] += 1;
        // balance.save().catch(err=>console.log(err));
     }else{
-          balance.updateOne({ userID: message.author.id,serverID:message.guildId }, { inventory:{[item]:1} }, function(err, res) {
+          balance.updateOne({ userID: message.author.id,serverID:message.guildId }, { 
+            ["items." + item.toLowerCase()]:{[item]:1} 
+          }, function(err, res) {
             console.log(err);
           });
     }
