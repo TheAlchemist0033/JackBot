@@ -7,15 +7,21 @@ module.exports = {
     usage: '+help [command name]',
     async execute(client, message, args) {
         if (!args.length) {
-            // Display a list of available commands
-            const commands = client.commands.map(cmd => ({name:`**${cmd.name}**`, value:`${cmd.description}`}));
-            console.log(commands)
+            // Display a list of available commands organized by folder
+            const categories = new Map();
+            client.commands.forEach(cmd => {
+                const folder = cmd.folder;
+                if (!categories.has(folder)) categories.set(folder, []);
+                categories.get(folder).push(cmd);
+            });
+
             const embed =  new EmbedBuilder()
                 .setTitle('Commands List')
                 .setColor('#0099ff');
 
-            commands.forEach(element => {
-                embed.addFields(element);
+            categories.forEach((commands, category) => {
+                const cmdList = commands.map(cmd => `**${cmd.name}**: ${cmd.description}`).join('\n');
+                embed.addFields({name:category, value:cmdList});
             });
             return message.channel.send({embeds:[embed]});
         } else {
