@@ -40,7 +40,8 @@ module.exports = {
             console.log("items updated");
         });
       }
-      const hasFishingPole = 'microteleporter' in res.inventory;
+
+      const hasFishingPole = 'microteleporter' in res.inventory || false;
       if (!hasFishingPole) {
         return message.channel.send(
           "You don't have a fishing pole! You can't fish without one."
