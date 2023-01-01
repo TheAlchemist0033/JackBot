@@ -20,10 +20,12 @@ module.exports = {
             // If the user doesn't have a balance, create one with a starting balance of 100
             if (!res) {
                 ball = new Balance({
-                    userId: message.author.id,
+                    userID: message.author.id,
+                    serverID:message.guildId,
                     balance: 100
                 });
                 await ball.save().catch(err=> console.log(err));
+                message.channel.send(`Your balance is 100 ZML.`);
             } else {
 
                 // Send a message with the user's balance
