@@ -15,7 +15,7 @@ module.exports = {
     if (!args.length) {
       return message.channel.send(`You didn't specify an item to purchase!`);
     }
-    const item = args[0];
+    const item = args[0].toLowerCase();
 
     // Check if the item is available for purchase
     shop.findOne({exists:1},async (err,res)=>{

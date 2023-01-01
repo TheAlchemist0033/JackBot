@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const mongoose = require('mongoose');
-
+const {EmbedBuilder} = require('discord.js');
 module.exports = {
     name: 'bal',
     description: 'View your balance.',
@@ -31,6 +31,12 @@ module.exports = {
             } else {
 
                 // Send a message with the user's balance
+                const embed = new EmbedBuilder()
+                .setTitle(`${message.author.username}'s Balance: `)
+                .addFields(
+                    {name:`Username: `,value:res.username},
+                    {name:`Balance: `,value:`${res.balance} ZMS`},
+                )
                 message.channel.send(`Your balance is ${res.balance} Zhmorgles (ZML).`);
             }
         })

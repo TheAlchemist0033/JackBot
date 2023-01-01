@@ -189,7 +189,7 @@ client.on("messageCreate", async (message) => {
 
             if (cooled > res.cooldown){
 
-                var casham = math.ceil(math.random() * 15);
+                var casham = math.ceil(math.random() * 25);
                 console.log(casham)
                 res.balance =  parseInt(res.balance + casham);
                 res.cooldown = new Date().getTime()

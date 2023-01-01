@@ -12,6 +12,36 @@ module.exports = {
         if (message.author.id == "608802993810440223") {
             // Find the user's balance in the database
             const shop = require('../../maindb/shop.js');
+            const items = require('../../maindb/itemvalues.js');
+            items.findOne({
+                exists:1
+            },async (err,res) => {
+                if(err) return console.log(err);
+                if(!res){
+                    Nitems = new items({
+                        exists: 1,
+                        items:{}
+                    });
+                    Nitems.save().catch(err => console.log(err));
+                }else{
+                    if (!args[0] || !args[1] || !args[2]) {
+                        return; //message.channel.send("You must specify an item name, cost, and usage in that order.");
+                    }
+                    items.updateOne({
+                        exists: 1
+                    }, {
+                        $set: {
+                            ["items." + args[0].toLowerCase()]: {
+                                value: args[1]*0.75,
+                            }
+                        }
+                    }, function(err, res) {
+                        if (err) return console.log(err);
+                        console.log("items updated");
+                    });
+                }
+            });
+
             shop.findOne({
                 exists: 1
             }, (err, res) => {
@@ -57,7 +87,7 @@ module.exports = {
                         exists: 1
                     }, {
                         $set: {
-                            ["stock." + args[0]]: {
+                            ["stock." + args[0].toLowerCase()]: {
                                 cost: args[1],
                                 usage: args.slice(2).join(" ")
                             }
@@ -81,5 +111,6 @@ module.exports = {
         } else {
             return message.channel.send("You are not authorized to do this.")
         }
+
     }
 };
