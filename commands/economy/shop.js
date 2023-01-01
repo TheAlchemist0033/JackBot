@@ -13,10 +13,8 @@ module.exports = {
     const Shop = require("../../maindb/shop.js");
 
     // Check if the user has specified an item to purchase
-    if (!args.length) {
-      return message.channel.send(`You didn't specify an item to purchase!`);
-    }
-    const item = args[0];
+    
+    //const item = args[0];
 
     // Check if the item is available for purchase
     shop.findOne({exists:1},async (err,res)=>{
