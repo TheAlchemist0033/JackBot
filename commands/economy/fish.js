@@ -77,13 +77,12 @@ module.exports = {
         // Add the fish to the user's inventory
         if(!res.inventory[caughtFish]){
             await Balance.findOneAndUpdate(
-            { userID: message.author.id },
-            {
-                $set: {
-                ['inventory.'+caughtFish]: 1
-                },$set:{fishcool:new Date().getTime()+180000}
-            }
-            );
+                { userID: message.author.id },
+                {
+                    $set: {
+                    ['inventory.'+caughtFish]: 1
+                    },$set:{fishcool:new Date().getTime()+180000}
+                });
 
             // Send a message to the channel
             message.channel.send(
