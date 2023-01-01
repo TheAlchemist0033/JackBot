@@ -90,7 +90,7 @@ module.exports = {
                 );
 
                 // Send a message with the updated balances
-                message.channel.send(`${message.author.username} has paid ${userToPay.username} ${args[1]} coins.`);
+                message.channel.send(`${message.author.username} has paid ${userToPay.username} ${args[1]} Zhmorgles.`);
             });
         });
     }
