@@ -35,6 +35,7 @@ fs.readdir("./commands/", (err, folders) => {
             }
             jsfiles.forEach((file) => {
                 let properties = require(`./commands/${folders[i]}/${file}`);
+                properties.folder = folders[i]; // <-- Add this line
                 console.log(`Loaded ${file}`);
                 comList.push(file);
                 client.commands.set(properties.name, properties)
@@ -42,6 +43,7 @@ fs.readdir("./commands/", (err, folders) => {
         })
     }
 });
+
 //end declares
 client.on("ready", () => {
     console.log(`${client.user.tag} is now active!`);
