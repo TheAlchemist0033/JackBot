@@ -114,7 +114,17 @@ module.exports = {
                     }else {
                         message.channel.send("You need to wait at least 30 seconds before robbing another user!")
                     }
-                } 
+                }else{
+                    await Balance.findOneAndUpdate({
+                        userID: message.author.id,
+                        serverID: message.guildId
+                    }, {
+                        $set: {
+                            robcool: new Date().getTime() + 30000
+                        }
+                    });
+                    message.channel.send("Your profile was re-initialized. Please run the command again.")
+                }
             }
         });
     },
