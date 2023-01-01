@@ -56,7 +56,8 @@ module.exports = {
                             cost:args[1],
                             usage:args.slice(2) 
                         } }, function(err, res) {
-                    message.channel.send("No shop found, configuring new shop data.");
+                            if(err) return console.log(err);
+                            message.channel.send("No shop found, configuring new shop data.");
 
                 }
             });

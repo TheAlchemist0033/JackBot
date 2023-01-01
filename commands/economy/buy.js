@@ -34,7 +34,7 @@ module.exports = {
     }
 
     // Check the cost of the item
-    var cost = res.stock.item;
+    var cost = res.stock.item.cost;
     // Find the user's balance in the database
     let balance = await Balance.findOne({ userID: message.author.id ,serverID:message.guildId});
 
@@ -55,10 +55,13 @@ module.exports = {
 
     // Subtract the cost of the item from the user's balance
     balance.balance -= cost;
+
     if(balance.inventory[item]){
         balance.inventory[item] += 1;
     }else{
-        balance.inventory[item] = 1;
+          balance.updateOne({ userID: message.author.id,serverID:message.guildId }, { inventory:{[item]:1} }, function(err, res) {
+            console.log(err);
+          });
     }
     await balance.save();
     // Send a message confirming the purchase
