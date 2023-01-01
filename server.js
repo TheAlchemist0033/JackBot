@@ -206,7 +206,7 @@ client.on("messageCreate", async (message) => {
             const newdoc = new Balance({
                 userID: message.author.id,
                 serverID: message.guildId,
-                usename: usernamestring,
+                username: usernamestring,
                 balance: 100,
                 cooldown: new Date()
             })
