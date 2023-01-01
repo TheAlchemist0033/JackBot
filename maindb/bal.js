@@ -7,7 +7,8 @@ const balanceSchema = new mongoose.Schema({
     inventory:{type:mongoose.Schema.Types.Mixed},
     cooldown:Number,
     fishcool:Number,
-    workcooldown:Number
+    workcooldown:Number,
+    robcool:Number
   });
   const Balance = mongoose.model('Balance', balanceSchema);
   module.exports = Balance

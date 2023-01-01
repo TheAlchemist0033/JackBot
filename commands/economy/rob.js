@@ -43,9 +43,24 @@ module.exports = {
         // If the user being robbed doesn't have a balance, create one with a starting balance of 0
         if (!res) {
           ball = new Balance({
+/*  userID: String,
+    serverID:String,
+    balance: Number,
+    username:String,
+    inventory:{type:mongoose.Schema.Types.Mixed},
+    cooldown:Number,
+    fishcool:Number,
+    workcooldown:Number,
+    robcool:Number*/
             userID: userToRob.id,
+            serverID:message.guildId,
+            balance:100,
             username: `${userToRob.username}#${userToRob.discriminator}`,
-            balance: 0,
+            inventory:{},
+            cooldown:0,
+            fishcool:0,
+            workcooldown:0,
+            robcool:0
           });
           await ball.save().catch((err) => console.log(err));
         }
@@ -56,7 +71,7 @@ module.exports = {
         // Update the balances of both users
         await Balance.findOneAndUpdate(
           { userID: message.author.id },
-          { $inc: { balance: amount } }
+          { $inc: { balance: amount } },{$set:{robcool:new Date().getTime() + 30000}}
         );
         await Balance.findOneAndUpdate(
           { userID: userToRob.id },
