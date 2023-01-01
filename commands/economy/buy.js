@@ -60,12 +60,14 @@ module.exports = {
     // Subtract the cost of the item from the user's balance
     balance.balance -= cost;
 
-    if(balance.inventory[item]){
-        balance.inventory[item] += 1;
+    if(!balance.inventory[item]){
+        balance.inventory[item] = 1;
+        console.log("noitem: " + item);
        // balance.save().catch(err=>console.log(err));
     }else{
       //whatever you do dont go look at my commit history to see how stupid i was when i was working on this...
-         balance.inventory[item] = 1;
+         balance.inventory[item] += 1;
+         console.log("item: "+ item);
     }
     await balance.save().catch(err=>console.log(err));
     // Send a message confirming the purchase
