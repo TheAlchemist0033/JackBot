@@ -25,7 +25,7 @@ module.exports = {
       }
 
       // Check if the user is on cooldown
-      if (!(res.cooldown > new Date().getTime())) {
+      if ((res.cooldown > new Date().getTime())) {
         return message.channel.send(
           `You need to wait before working again. Time remaining: ${(res.cooldown - new Date().getTime()) /
             1000} seconds`
