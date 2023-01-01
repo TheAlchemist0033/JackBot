@@ -76,23 +76,24 @@ module.exports = {
 
         // Add the fish to the user's inventory
         if(!res.inventory[fish[index]]){
-        await Balance.findOneAndUpdate(
-          { userID: message.author.id },
-          {
-            $set: {
-              ['inventory.'+caughtFish]: 1
-            },$set:{fishcool:new Date().getTime()+180000}
-          }
-        );
+            await Balance.findOneAndUpdate(
+            { userID: message.author.id },
+            {
+                $set: {
+                ['inventory.'+caughtFish]: 1
+                },$set:{fishcool:new Date().getTime()+180000}
+            }
+            );
 
-        // Send a message to the channel
-        message.channel.send(
-          `You caught a ${fish[caughtFish].name} worth ${
-            fish[caughtFish].value
-          } Zhmorgles (ZML)!`
-        );
+            // Send a message to the channel
+            message.channel.send(
+            `You caught a ${fish[caughtFish].name} worth ${
+                fish[caughtFish].value
+            } Zhmorgles (ZML)!`
+            );
         }else{
             res.inventory[fish[index]] += 1;
+            res.fishcool = new Date().getTime()+180000;
             res.save().catch(err => console.log(err));
         }
     } else {
