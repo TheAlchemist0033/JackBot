@@ -111,10 +111,10 @@ module.exports = {
                             }
 
                         });
+                    }else {
+                        message.channel.send("You need to wait at least 30 seconds before robbing another user!")
                     }
-                } else {
-                    message.channel.send("You need to wait at least 30 seconds before robbing another user!")
-                }
+                } 
             }
         });
     },
