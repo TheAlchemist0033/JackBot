@@ -27,7 +27,7 @@ module.exports = {
                     cooldown:new Date().getTime()
                 });
                 await ball.save().catch(err=> console.log(err));
-                message.channel.send(`Your balance is 100 Zhmorgles (ZML).`);
+                message.channel.send(`Your balance is 100 Zhmorgles (ZML)... You can earn more by talking in this server.`);
             } else {
 
                 // Send a message with the user's balance
