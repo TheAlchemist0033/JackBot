@@ -34,7 +34,7 @@ module.exports = {
     }
 
     // Check the cost of the item
-    var cost = res.stock.item.cost;
+    var cost = res.stock[item].cost;
     // Find the user's balance in the database
     let balance = await Balance.findOne({ userID: message.author.id ,serverID:message.guildId});
 
