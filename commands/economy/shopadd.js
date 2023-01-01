@@ -38,16 +38,26 @@ module.exports = {
                 }
             }
             */
-            if(!args[0] || !args[1] || !args[2]){
-                return message.channel.send("You must specify an item name, cost, and usage in that order.");
-            }
-            slice = args.slice(2);
-            res.shop.stock[args[0]].cost = parseInt(args[1]);
-            res.shop.stock[args[0]].usage = slice.join(" ");
-            res.save().catch(err=>{console.log(err);})
-            message.channel.send("No shop found, configuring new shop data.");
-        }
 
+            TShop = new shop({
+                exists:1,
+                stock:{
+                }
+              });
+              TShop.save().catch(err=>console.log(err));
+              message.channel.send("Shop did not exist, run command again as shop has now been initialized.");
+
+        }
+        if(!args[0] || !args[1] || !args[2]){
+            return message.channel.send("You must specify an item name, cost, and usage in that order.");
+        }
+        slice = args.slice(2);
+        res.shop.stock[args[0]].cost = parseInt(args[1]);
+        res.shop.stock[args[0]].usage = slice.join(" ");
+        res.save().catch(err=>{console.log(err);})
+        message.channel.send("No shop found, configuring new shop data.");
+
+        
     });
     
   }else{

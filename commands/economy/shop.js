@@ -41,6 +41,7 @@ module.exports = {
             for(const key of res.stock){
                 embed.addFields({name:`${key}: ${key.cost} ZML`,value:key.usage});
             }
+            message.channel.send({embeds:[embed]});
     }
 })
   }

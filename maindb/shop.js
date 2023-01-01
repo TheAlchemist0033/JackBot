@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const shopSchema = new mongoose.Schema({
     shop:{
-        exists:1,
+        exists:Number,
         stock:{
             type:mongoose.Schema.Types.Mixed,
             },
