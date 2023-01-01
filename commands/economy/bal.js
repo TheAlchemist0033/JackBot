@@ -10,7 +10,7 @@ module.exports = {
         const Balance = require('../../maindb/bal.js');
 
         // Find the user's balance in the database
-        const balance = await Balance.findOne({
+        Balance.findOne({
             userID: message.author.id,
             serverID: message.guildId
         }, async (err, res) => {
