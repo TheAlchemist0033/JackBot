@@ -63,9 +63,13 @@ module.exports = {
             robcool:0
           });
           await ball.save().catch((err) => console.log(err));
-        }
+          message.cannel.send("You couldn't rob that user! They do not have any money!")
+        }else{
 
         // Generate a random number between 0 and the user being robbed's balance
+        if(res.balance <= 50){
+            return message.channel.send("That person is too poor to rob.");
+        }
         const amount = Math.floor(Math.random() * res.balance);
 
         // Update the balances of both users
@@ -81,6 +85,7 @@ module.exports = {
         // Send a message to the channel
         message.channel.send(
           `${message.author.username} robbed ${amount} Zhmorgles (ZML) from ${userToRob.username}!`); 
+        }
         });
     });
   },
