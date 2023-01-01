@@ -23,25 +23,31 @@ module.exports = {
     }
 
     // Find the user's balance in the database
-    Balance.findOne({ userID: message.author.id }, async (err, res) => {
+    Balance.findOne({ userID: message.author.id,serverID:message.guildId}, async (err, res) => {
       if (err) return console.log(err);
 
       // If the user doesn't have a balance, create one with a starting balance of 0
       if (!res) {
         ball = new Balance({
-          userID: message.author.id,
+          uuserID: userToRob.id,
+          serverID:message.guildId,
+          balance:100,
           username: `${message.author.username}#${message.author.discriminator}`,
-          balance: 0,
+          inventory:{},
+          cooldown:0,
+          fishcool:0,
+          workcooldown:0,
+          robcool:0
         });
         await ball.save().catch((err) => console.log(err));
-      }
+      }else{
 
       // Find the user to rob's balance in the database
-      Balance.findOne({ userID: userToRob.id }, async (err, res) => {
+      Balance.findOne({ userID: userToRob.id }, async (err, rres) => {
         if (err) return console.log(err);
 
         // If the user being robbed doesn't have a balance, create one with a starting balance of 0
-        if (!res) {
+        if (!rres) {
           ball = new Balance({
 /*  userID: String,
     serverID:String,
@@ -67,10 +73,10 @@ module.exports = {
         }else{
 
         // Generate a random number between 0 and the user being robbed's balance
-        if(res.balance <= 50){
+        if(rres.balance <= 50){
             return message.channel.send("That person is too poor to rob.");
         }
-        const amount = Math.floor(Math.random() * res.balance);
+        const amount = Math.floor(Math.random() * rres.balance);
 
         // Update the balances of both users
         await Balance.findOneAndUpdate(
@@ -86,7 +92,9 @@ module.exports = {
         message.channel.send(
           `${message.author.username} robbed ${amount} Zhmorgles (ZML) from ${userToRob.username}!`); 
         }
+
         });
+    }
     });
   },
 };
