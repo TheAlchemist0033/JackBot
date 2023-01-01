@@ -61,20 +61,20 @@ module.exports = {
 
       // Set up an object of possible fish to catch
       const fish = {
-        trout: {
+        zingledorp: {
           name: 'ZingleDorp',
           value: 10,
         },
-        salmon: {
+        morthelrop: {
           name: 'Morthelrop',
           value: 20,
         },
-        bass: {
+        beezingozar: {
           name: 'Beezingozar',
           value: 30,
         },
-        catfish: {
-          name: 'KloomKlom',
+        kloomkloom: {
+          name: 'KloomKloom',
           value: 40,
         },
       };
@@ -93,7 +93,7 @@ module.exports = {
           { userID: message.author.id },
           {
             $set: {
-              [`items.${caughtFish}`]: fish[caughtFish],
+              [`inventory.${caughtFish}`]: fish[caughtFish],
             },$set:{fishcool:new Date().getTime()+180000}
           }
         );
@@ -110,7 +110,7 @@ module.exports = {
             { userID: message.author.id },
             {
               $set: {
-                fishcool:new Date().getTime() + 18000,
+                fishcool:new Date().getTime() + 180000,
               }
             }
           );
