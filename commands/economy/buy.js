@@ -44,7 +44,8 @@ module.exports = {
         userID: message.author.id,
         serverID:message.guildId,
         username:message.author.username+"#"+message.author.discriminator,
-        balance: 100
+        balance: 100,
+        cooldown:new Date().getTime()
       });
       await balance.save();
     return message.channel.send("You did not have an account yet, please try running this command again. You currently have 100 Zhmorgles (ZML).");

@@ -184,12 +184,12 @@ client.on("messageCreate", async (message) => {
     }, async (err, res) => {
         if (err) return console.log(err);
         if (res) {
-            var timenow = new Date();
+            var timenow = new Date().getTime();
             if ((timenow - res.cooldown) > (10 * 1000)) {
 
                 var casham = math.ceil(math.random() * 15);
                 res.balance += casham;
-                res.cooldown = new Date()
+                res.cooldown = new Date().getTime()
             }
             console.log(res.cooldown)
         } else {
@@ -200,7 +200,7 @@ client.on("messageCreate", async (message) => {
                 serverID: message.guildId,
                 username: usernamestring,
                 balance: 100,
-                cooldown: new Date()
+                cooldown: new Date().getTime()
             })
             await newdoc.save().catch(err => console.log(err));
         }
