@@ -75,7 +75,7 @@ module.exports = {
         const caughtFish = fish[index];
 
         // Add the fish to the user's inventory
-        if(!res.inventory[fish[index]]){
+        if(!res.inventory[caughtFish]){
             await Balance.findOneAndUpdate(
             { userID: message.author.id },
             {
@@ -90,9 +90,10 @@ module.exports = {
             `You caught a ${caughtFish}!`
             );
         }else{
-            res.inventory[fish[index]] += 1;
+            res.inventory[caughtFish] += 1;
             res.fishcool = new Date().getTime()+180000;
             res.save().catch(err => console.log(err));
+            message.channel.send(`You caught another ${caughtFish}`)
         }
     } else {
         // Send a message to the channel if the user didn't catch a fish
