@@ -71,6 +71,7 @@ client.on("messageCreate", async (message) => {
         // Create a model for the bump data
         const Bump =require('./maindb/bump.js');
         const uBump = require('./maindb/ubump.js');
+        const Balance = require("./maindb/bal.js");
         //console.log(message)
         if (message.author.id === '302050872383242240') {
           // Check if the message content includes the string "Bump done!"
@@ -176,6 +177,27 @@ client.on("messageCreate", async (message) => {
 
           //end development section
     if (message.author.bot) return;
+    Balance.findOne({
+        serverID:message.guildId,
+        userID:message.author.id
+    },async (err,res)=>{
+        if(err) return console.log(err);
+        if(res){
+            var timenow = new Date();
+            if((timenow-res.cooldown) > (10*60*1000)){
+
+            var casham = math.ceil(math.random()*15); 
+            res.balance+= casham;
+            res.cooldown = new Date()
+            }
+        }else{
+            const newdoc = new Balance({userID: message.author.id,
+                serverID:message.guildId,
+                usename:message.author.username+"#"+message.author.discriminator,
+                balance: 100})
+            await newdoc.save().catch(err=> console.log(err));
+        }
+    })
     //message.channel.send("test")
     function clean(text) {
         if (typeof(text) === "string")
