@@ -37,7 +37,7 @@ module.exports = {
                 const embed = new EmbedBuilder()
                 .setTitle("Shop Inventory")
                 console.log(res.stock);
-            for(const key of res.stock){
+            for(const key in res.stock){
                 embed.addFields({name:`${key}: ${key.cost} ZML`,value:key.usage});
             }
             message.channel.send({embeds:[embed]});
