@@ -23,7 +23,12 @@ module.exports = {
           inventory: {},
         });
         await ball.save().catch((err) => console.log(err));
-      }
+      }else{
+        if(res.fishcool){
+            if(!res.fishcool > new Date().getTime() ){
+                return message.channel.send("You need to wait 3 minutes between teleportation attempts.")
+            }
+        }
 
       // Check if the user has a fishing pole in their inventory
       if(!res.inventory){
@@ -44,7 +49,7 @@ module.exports = {
       const hasFishingPole = 'microteleporter' in res.inventory || false;
       if (!hasFishingPole) {
         return message.channel.send(
-          "You don't have a fishing pole! You can't fish without one."
+          "You don't have a microteleporter! You can't teleport fish without one."
         );
       }
 
@@ -89,6 +94,12 @@ module.exports = {
             },
           }
         );
+        await Balance.findOneAndUpdate({
+            userID:message.author.id,
+            serverID:message.guildId
+        },{$set:{
+            fishcool:new Date().getTime()+180000
+        }})
 
         // Send a message to the channel
         message.channel.send(
@@ -100,6 +111,8 @@ module.exports = {
         // Send a message to the channel if the user didn't catch a fish
         message.channel.send("You didn't catch any fish this time. Better luck next time!");
       }
+    }
+                
     });
   },
 };

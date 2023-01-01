@@ -38,7 +38,7 @@ module.exports = {
       // Update the user's balance and cooldown time
       await Balance.findOneAndUpdate(
         { userID: message.author.id },
-        { $inc: { balance: amount }, $set: { cooldown: new Date().getTime() + 180000 } }
+        { $inc: { balance: amount }, $set: { workcooldown: new Date().getTime()+180000} }
       );
 
       // Send a message to the channel
