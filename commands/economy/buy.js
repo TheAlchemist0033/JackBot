@@ -64,11 +64,8 @@ module.exports = {
         balance.inventory[item] += 1;
        // balance.save().catch(err=>console.log(err));
     }else{
-          balance.updateOne({ userID: message.author.id,serverID:message.guildId }, { 
-            ["inventory." + item.toLowerCase()]:{[item]:1} 
-          }, function(err, res) {
-            console.log(err);
-          });
+      //whatever you do dont go look at my commit history to see how stupid i was when i was working on this...
+         balance.inventory[item] = 1;
     }
     await balance.save().catch(err=>console.log(err));
     // Send a message confirming the purchase
