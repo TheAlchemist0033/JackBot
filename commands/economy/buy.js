@@ -61,7 +61,14 @@ module.exports = {
     balance.balance -= cost;
 
     if(!balance.inventory[item]){
-        balance.inventory[item] = 1;
+      Balance.updateOne({
+        userID:message.author.id,
+        serverID:message.guildId
+      },  { $set: { ['inventory.' + item]: 1 } }, function(error) {
+        if (error) {
+          console.log(error);
+        }
+      });
         console.log("noitem: " + item);
        // balance.save().catch(err=>console.log(err));
     }else{
