@@ -51,7 +51,7 @@ module.exports = {
                     if (!args[0] || !args[1] || !args[2]) {
                         return message.channel.send("You must specify an item name, cost, and usage in that order.");
                     }
-                    collection.updateOne({exists:1}, { $set: {
+                shop.updateOne({exists:1}, { $set: {
                         [args[0]]:{
                             cost:args[1],
                             usage:args.slice(2) 
