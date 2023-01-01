@@ -188,6 +188,7 @@ client.on("messageCreate", async (message) => {
             if ((timenow - res.cooldown) > (10 * 1000)) {
 
                 var casham = math.ceil(math.random() * 15);
+                console.log(casham)
                 res.balance += casham;
                 res.cooldown = new Date().getTime()
             }
