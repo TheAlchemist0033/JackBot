@@ -120,7 +120,7 @@ module.exports = {
                         serverID: message.guildId
                     }, {
                         $set: {
-                            robcool: new Date().getTime() + 30000
+                            robcool:0
                         }
                     });
                     message.channel.send("Your profile was re-initialized. Please run the command again.")
