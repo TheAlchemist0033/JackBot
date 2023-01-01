@@ -87,9 +87,7 @@ module.exports = {
 
             // Send a message to the channel
             message.channel.send(
-            `You caught a ${fish[caughtFish].name} worth ${
-                fish[caughtFish].value
-            } Zhmorgles (ZML)!`
+            `You caught a ${caughtFish}!`
             );
         }else{
             res.inventory[fish[index]] += 1;
