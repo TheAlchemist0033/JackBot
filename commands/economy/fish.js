@@ -62,20 +62,20 @@ module.exports = {
       // Set up an object of possible fish to catch
       const fish = {
         zingledorp: {
-          name: 'ZingleDorp',
+          count:1,
           value: 10,
         },
         morthelrop: {
-          name: 'Morthelrop',
+          count:1,
           value: 20,
         },
         beezingozar: {
-          name: 'Beezingozar',
+          count:1,
           value: 30,
         },
         kloomkloom: {
-          name: 'KloomKloom',
-          value: 40,
+            count:1,
+            value: 40,
         },
       };
 
