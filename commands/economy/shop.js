@@ -7,7 +7,7 @@ module.exports = {
   name: 'shop',
   description: 'Lists all items.',
   usage:'+shop',
-  async execute(message, args) {
+  async execute(client,message, args) {
     // Set up a Mongoose model for the user balances
     const Balance = require("../../maindb/bal.js");
     const Shop = require("../../maindb/shop.js");
