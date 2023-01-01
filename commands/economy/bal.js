@@ -22,6 +22,7 @@ module.exports = {
                 ball = new Balance({
                     userID: message.author.id,
                     serverID:message.guildId,
+                    usename:message.author.username+"#"+message.author.discriminator,
                     balance: 100
                 });
                 await ball.save().catch(err=> console.log(err));

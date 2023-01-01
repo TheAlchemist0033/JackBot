@@ -43,6 +43,7 @@ module.exports = {
       balance = new Balance({
         userID: message.author.id,
         serverID:message.guildId,
+        username:message.author.username+"#"+message.author.discriminator,
         balance: 100
       });
       await balance.save();
