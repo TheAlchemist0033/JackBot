@@ -41,13 +41,15 @@ module.exports = {
 
         }, {
             $set: {
-               inventory:{}
+               inventory:{},
+               fishcool:0
             }
         }, function(err, res) {
             if (err) return console.log(err);
             console.log("items updated");
         });
-      }
+        message.channel.send("Your inventory was not initialized, try running the command again.")
+      }else{
 
       const hasFishingPole = 'microteleporter' in res.inventory || false;
       if (!hasFishingPole) {
@@ -108,6 +110,7 @@ module.exports = {
         
       }
     }
+  }
                 
     });
   },
