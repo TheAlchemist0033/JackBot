@@ -92,6 +92,11 @@ client.on("messageCreate", async (message) => {
                 filter,
                 time: 10000
             });
+            Bump.findOneAndUpdate({serverID:message.guildId}, {
+                $set: {
+                    bumpTime:new Date().getTime() + 7200000
+                }
+            })
             var colc = 0
             collector.on('collect', async m => {
                 colc += 1;
@@ -136,11 +141,12 @@ client.on("messageCreate", async (message) => {
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    message.channel.send(`Bump data saved to database! I'll remind you in two hours to bump again.`);
+                                    message.channel.send(`Bump data saved to database! I'll remind you in two hours to bump again...`);
                                 }
                             });
                         } else {
                             res.BumpTime = new Date() + 7200000;
+                            notifyCooldown: new Date().getTime();
                             res.save().catch(err => console.log(err));
                             message.channel.send(`Bump data saved to database! I'll remind you in two hours to bump again.`);
                         }
