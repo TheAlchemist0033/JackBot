@@ -167,6 +167,7 @@ client.on("messageCreate", async (message) => {
         // Check if there are any bumps to delete
         if (bumpsToDelete.length >= 1) {
             // Send a message using message.channel.send
+            if (message.author.bot) return;
             message.channel.send('There are bumps that are older than 2 hours!');
 
             // Loop through the bumps to delete and delete them from the database
