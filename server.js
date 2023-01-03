@@ -126,6 +126,8 @@ client.on("messageCreate", async (message) => {
 
                         }
                     })
+
+
                     Bump.findOne({
                         serverID: message.guildId
                     }, (error, res) => {
