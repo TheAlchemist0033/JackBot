@@ -15,9 +15,10 @@ module.exports = {
 
         // Check if a user mention was provided
         if (!message.mentions.users.size) {
-            return message.channel.send(new EmbedBuilder()
+            var embed  = new EmbedBuilder()
                 .setColor('#FF0000')
-                .setTitle("You need to specify a user to kick!"));
+                .setTitle("You need to specify a user to kick!")
+            return message.channel.send({embeds:[embed]});
         }
 
         // Get the mentioned user
