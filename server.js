@@ -129,7 +129,7 @@ client.on("messageCreate", async (message) => {
                         } else if (!res) {
                             const newBump = new Bump({
                                 serverID: message.guildId,
-                                bumpTime: new Date(),
+                                bumpTime: new Date().getTime() + 7200000,
                                 notifyCooldown: new Date().getTime()
                             });
                             newBump.save((error) => {
@@ -171,7 +171,7 @@ client.on("messageCreate", async (message) => {
         Bump.findOne({
             serverID: message.guildId,
             bumpTime: {
-                $lt: currentTime - 2 * 60 * 60 * 1000
+                $lt: currentTime
             },
             notifyCooldown: {
                 $lt: currentTime
@@ -184,6 +184,7 @@ client.on("messageCreate", async (message) => {
             // Send a message using message.channel.send
 
             if (message.author.bot) return;
+            if(res.bumpTime < currentTime){
             res.notifyCooldown = new Date().getTime() + 180000
             res.save().catch(err => console.log(err));
             message.channel.send('There are bumps that are older than 2 hours!');
@@ -192,6 +193,7 @@ client.on("messageCreate", async (message) => {
             /* bumpsToDelete.forEach(async (bump) => {
                await Bump.deleteOne({ _id: bump._id });
              });*/
+            }
         });
     };
     checkBumpTime(message)
