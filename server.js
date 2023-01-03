@@ -136,13 +136,13 @@ client.on("messageCreate", async (message) => {
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
+                                    message.channel.send(`Bump data saved to database! I'll remind you in two hours to bump again.`);
                                 }
                             });
                         } else {
                             res.BumpTime = new Date();
                             res.save().catch(err => console.log(err));
-                            console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
+                            message.channel.send(`Bump data saved to database! I'll remind you in two hours to bump again.`);
                         }
                     });
 
