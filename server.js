@@ -163,40 +163,25 @@ client.on("messageCreate", async (message) => {
     }
 
     //check if there are bumps already in the database that are 2 hours old, or older. 
-    const checkBumpTime = async (message) => {
         // Get the current time
         const currentTime = new Date();
 
         // Find all bumps in the database that are older than 2 hours
         Bump.findOne({
             serverID: message.guildId,
-            bumpTime: {
-                $lt: currentTime
-            },
-            notifyCooldown: {
-                $lt: currentTime
-            }
         }, (err, res) => {
 
             if (err) return console.log(err);
-            if (!res) return;
-
-            // Send a message using message.channel.send
-
+            if (!res) console.log("no results");
             if (message.author.bot) return;
-            if(res.bumpTime < currentTime){
-            res.notifyCooldown = new Date().getTime() + 180000
-            res.save().catch(err => console.log(err));
-            message.channel.send('There are bumps that are older than 2 hours!');
-
-            // Loop through the bumps to delete and delete them from the database
-            /* bumpsToDelete.forEach(async (bump) => {
-               await Bump.deleteOne({ _id: bump._id });
-             });*/
+            if (res.bumpTime < currentTime) {
+                if (res.notifyCooldown < currentTime) {
+                    res.notifyCooldown = new Date().getTime() + 180000
+                    res.save().catch(err => console.log(err));
+                    message.channel.send('There are bumps that are older than 2 hours!');
+                }
             }
         });
-    };
-    checkBumpTime(message)
     //  setInterval(checkBumpTime, 2 * 60 * 60 * 1000);
 
     //end development section
