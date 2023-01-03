@@ -140,7 +140,7 @@ client.on("messageCreate", async (message) => {
                                 }
                             });
                         } else {
-                            res.BumpTime = new Date();
+                            res.BumpTime = new Date() + 7200000;
                             res.save().catch(err => console.log(err));
                             message.channel.send(`Bump data saved to database! I'll remind you in two hours to bump again.`);
                         }
@@ -174,12 +174,12 @@ client.on("messageCreate", async (message) => {
             if (err) return console.log(err);
             if (!res) console.log("no results");
             if (message.author.bot) return;
-            if (res.bumpTime < currentTime) {
-                if (res.notifyCooldown < currentTime) {
+            if (res.bumpTime < currentTime && res.notifyCooldown < currentTime) {
+ 
                     res.notifyCooldown = new Date().getTime() + 180000
                     res.save().catch(err => console.log(err));
                     message.channel.send('There are bumps that are older than 2 hours!');
-                }
+    
             }
         });
     //  setInterval(checkBumpTime, 2 * 60 * 60 * 1000);
