@@ -1,9 +1,16 @@
-require('dotenv').config({path: "./.env"});
+require('dotenv').config({
+    path: "./.env"
+});
 const Discord = require('discord.js');
 const fs = require("fs");
 const math = require("mathjs");
-const {Client,GatewayIntentBits}=require('discord.js');
-const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
+const {
+    Client,
+    GatewayIntentBits
+} = require('discord.js');
+const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+});
 const mongoose = require("mongoose");
 const url = process.env.MONURL //"mongodb://127.0.0.1:27017";
 try {
@@ -23,6 +30,9 @@ const config = require("./config.json");
 const {
     createVerify
 } = require('crypto');
+const {
+    re
+} = require('mathjs');
 fs.readdir("./commands/", (err, folders) => {
     if (err) throw err;
     for (let i = 0; i < folders.length; i++) {
@@ -106,7 +116,7 @@ client.on("messageCreate", async (message) => {
 
                         } else {
                             res.counts += 1;
-                            res.save().catch(err=>console.log(err));
+                            res.save().catch(err => console.log(err));
                             message.channel.send("Ive updated the bump count for " + `${m.author.username}#${m.author.discriminator} to ${res.counts}`);
 
                         }
@@ -119,7 +129,8 @@ client.on("messageCreate", async (message) => {
                         } else if (!res) {
                             const newBump = new Bump({
                                 serverID: message.guildId,
-                                bumpTime: new Date()
+                                bumpTime: new Date(),
+                                notifyCooldown: new Date().getTime()
                             });
                             newBump.save((error) => {
                                 if (error) {
@@ -130,7 +141,7 @@ client.on("messageCreate", async (message) => {
                             });
                         } else {
                             res.BumpTime = new Date();
-                            res.save().catch(err=>console.log(err));
+                            res.save().catch(err => console.log(err));
                             console.log(`Bump data saved to database! I'll remind you in two hours to bump again.`);
                         }
                     });
@@ -157,24 +168,31 @@ client.on("messageCreate", async (message) => {
         const currentTime = new Date();
 
         // Find all bumps in the database that are older than 2 hours
-        const bumpsToDelete = await Bump.find({
+        Bump.findOne({
             serverID: message.guildId,
             bumpTime: {
                 $lt: currentTime - 2 * 60 * 60 * 1000
+            },
+            notifyCooldown: {
+                $lt: currentTime
             }
-        });
+        }, (err, res) => {
 
-        // Check if there are any bumps to delete
-        if (bumpsToDelete.length >= 1) {
+            if (err) return console.log(err);
+            if (!res) return;
+
             // Send a message using message.channel.send
+
             if (message.author.bot) return;
+            res.notifyCooldown = new Date().getTime() + 180000
+            res.save().catch(err => console.log(err));
             message.channel.send('There are bumps that are older than 2 hours!');
 
             // Loop through the bumps to delete and delete them from the database
             /* bumpsToDelete.forEach(async (bump) => {
                await Bump.deleteOne({ _id: bump._id });
              });*/
-        }
+        });
     };
     checkBumpTime(message)
     //  setInterval(checkBumpTime, 2 * 60 * 60 * 1000);
@@ -188,15 +206,15 @@ client.on("messageCreate", async (message) => {
         if (err) return console.log(err);
         if (res) {
             var timenow = new Date().getTime();
-            let cooled = timenow-20*1000;
+            let cooled = timenow - 20 * 1000;
 
-            if (cooled > res.cooldown){
+            if (cooled > res.cooldown) {
 
                 var casham = math.ceil(math.random() * 25);
                 console.log(casham)
-                res.balance =  parseInt(res.balance + casham);
+                res.balance = parseInt(res.balance + casham);
                 res.cooldown = new Date().getTime()
-                res.save().catch(err=>console.log(err));
+                res.save().catch(err => console.log(err));
                 console.log(res.cooldown)
             }
 
