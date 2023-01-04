@@ -5,7 +5,7 @@ const bumpSchema = new mongoose.Schema({
       required: true
     },
     bumpTime: {
-      type: Date,
+      type: Number,
       required: true
     },
     notifyCooldown:{

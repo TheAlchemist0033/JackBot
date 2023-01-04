@@ -138,6 +138,7 @@ client.on("messageCreate", async (message) => {
                                 serverID: message.guildId,
                                 bumpTime: new Date().getTime() + 7200000,
                                 notifyCooldown: new Date().getTime()
+                                
                             });
                             newBump.save((error) => {
                                 if (error) {
