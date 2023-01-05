@@ -148,7 +148,7 @@ client.on("messageCreate", async (message) => {
                                 }
                             });
                         } else {
-                            res.BumpTime = new Date().getTime() + 7200000;
+                            res.bumpTime = new Date().getTime() + 7200000;
                             res.notifyCooldown= new Date().getTime();
                             res.save().catch(err => console.log(err));
                             message.channel.send(`Bump data saved to database! I'll remind you in two hours to bump again.`);
