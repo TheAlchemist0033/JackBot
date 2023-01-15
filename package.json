@@ -20,6 +20,7 @@
         "mathjs": "^11.0.1",
         "mongoose": "^6.8.0",
         "node-fetch": "^3.3.0",
+        "openai": "^3.1.0",
         "pastebin-ts": "^1.3.0",
         "reaction-balancer": "^2.0.1",
         "remove": "^0.1.5",
