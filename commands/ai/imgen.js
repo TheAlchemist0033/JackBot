@@ -30,10 +30,10 @@ module.exports = {
               image_urls = response.data.data;
 
             //const imageUrl = response.data.data.url;
-            console.log(response)
+            console.log(image_urls)
             const embed = new EmbedBuilder()
             .setTitle(`Generated Image:`)
-              .setColor(0x0099ff);
+            .setColor(0x0099ff);
             for(let i=0;i<response.data.data.length;i++){
                 embed.addFields({name:`Image ${i}`,value:image_urls[i]})
             }
