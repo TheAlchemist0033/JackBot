@@ -19,19 +19,24 @@ module.exports = {
 
         try {
             // Use the DALL-E API to generate an image based on the query
+            thismess = await message.channel.send("Generating image, please wait...")
+            
             const response = await openai.createImage({
                 prompt: query,
                 n: 2,
-                size: "1024x1024",
-                response_format:"url"
+                size: "1024x1024"
               });
 
+              image_urls = response.data.data;
+
             //const imageUrl = response.data.data.url;
-            thismess = await message.channel.send("Generating image, please wait...")
+            console.log(response)
             const embed = new EmbedBuilder()
             .setTitle(`Generated Image:`)
-              .setImage(response)
               .setColor(0x0099ff);
+            for(let i=0;i<response.data.data.length;i++){
+                embed.addFields({name:`Image ${i}`,value:image_urls[i]})
+            }
             thismess.edit({
               embeds: [embed]
             });
