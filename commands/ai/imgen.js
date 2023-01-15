@@ -1,5 +1,9 @@
-const OpenAI = require('@openai/api');
-const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 module.exports = {
     name: 'imgen',
@@ -14,12 +18,17 @@ module.exports = {
 
         try {
             // Use the DALL-E API to generate an image based on the query
-            const response = await openai.images.generate({ prompt: query });
+            const response = await openai.createImage({
+                prompt: query,
+                n: 2,
+                size: "1024x1024",
+                response_format:"url"
+              });
 
-            const imageUrl = response.data.data.url;
+            //const imageUrl = response.data.data.url;
             const embed = new EmbedBuilder()
             .setTitle(`Generated Image:`)
-              .setImage(imageUrl)
+              .setImage(response)
               .setColor(0x0099ff);
             await message.channel.send({
               embeds: [embed]
