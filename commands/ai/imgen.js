@@ -1,4 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai");
+const { EmbedBuilder } = require('discord.js');
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_KEY,
@@ -26,11 +27,12 @@ module.exports = {
               });
 
             //const imageUrl = response.data.data.url;
+            thismess = await message.channel.send("Generating image, please wait...")
             const embed = new EmbedBuilder()
             .setTitle(`Generated Image:`)
               .setImage(response)
               .setColor(0x0099ff);
-            await message.channel.send({
+            thismess.edit({
               embeds: [embed]
             });
         } catch (error) {
