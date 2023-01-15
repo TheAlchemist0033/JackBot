@@ -28,12 +28,10 @@ module.exports = {
               });
 
               image_url = response.data.data;
-
-            console.log(image_url)
             const embed = new EmbedBuilder()
             .setTitle(`Generated Image:`)
             .setColor(0x0099ff)
-            .setImage(image_url.url)
+            .setImage(image_url[0].url)
             thismess.edit({
               embeds: [embed]
             });
