@@ -35,7 +35,7 @@ module.exports = {
             .setTitle(`Generated Image:`)
             .setColor(0x0099ff);
             for(let i=0;i<response.data.data.length;i++){
-                embed.addFields({name:`Image ${i}`,value:image_urls[i]})
+                embed.addFields({name:`Image ${i}`,value:image_urls[i].url})
             }
             thismess.edit({
               embeds: [embed]
