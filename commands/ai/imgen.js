@@ -27,13 +27,13 @@ module.exports = {
                 size: "1024x1024"
               });
 
-              image_url = response.data.data.url;
+              image_url = response.data.data;
 
             console.log(image_url)
             const embed = new EmbedBuilder()
             .setTitle(`Generated Image:`)
             .setColor(0x0099ff)
-            .setImage(image_url)
+            .setImage(image_url.url)
             thismess.edit({
               embeds: [embed]
             });
