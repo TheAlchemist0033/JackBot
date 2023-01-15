@@ -23,20 +23,17 @@ module.exports = {
             
             const response = await openai.createImage({
                 prompt: query,
-                n: 2,
+                n: 1,
                 size: "1024x1024"
               });
 
-              image_urls = response.data.data;
+              image_url = response.data.data.url;
 
-            //const imageUrl = response.data.data.url;
-            console.log(image_urls)
+            console.log(image_url)
             const embed = new EmbedBuilder()
             .setTitle(`Generated Image:`)
-            .setColor(0x0099ff);
-            for(let i=0;i<response.data.data.length;i++){
-                embed.addFields({name:`Image ${i}`,value:image_urls[i].url})
-            }
+            .setColor(0x0099ff)
+            .setImage(image_url)
             thismess.edit({
               embeds: [embed]
             });
