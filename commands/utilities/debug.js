@@ -6,30 +6,21 @@ module.exports = {
     description: 'For debugging use.',
     usage: '+debug [data]',
     async execute(client, message, args) {
-        const cheerio = require("cheerio");
-
-        async function getWikipediaImage(url) {
-          try {
-            // Fetch the Wikipedia page
-            const response = await fetch(url);
-            const html = await response.text();
-        
-            // Load the HTML into cheerio
-            const $ = cheerio.load(html);
-        
-            // Find the image element
-            const image = $(".image img");
-            const imageUrl = image.attr("src");
-        
-            return imageUrl;
-          } catch (error) {
-            console.error(error);
-            return null;
-          }
+      var delM = await message.channel.send("10");
+      var cDown = 10
+      async function mss(){
+        if(cDown > 0){
+          setTimeout(async () => {
+            cD = (cDown-1).toString() 
+            delM = await delM.edit(cD)
+            mss()
+          },1000)
+        }else{
+          delM.delete()
         }
-        const imageUrl = await getWikipediaImage(args[0]);
-        message.channel.send(`logging data: https:${imageUrl}`)
-        console.log(imageUrl)
-        
+          
+      }
+      mss()
+
     },
 };
