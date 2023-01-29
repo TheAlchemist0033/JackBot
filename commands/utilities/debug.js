@@ -10,7 +10,7 @@ module.exports = {
       var cmess = counter.toString();
       mss = await message.channel.send(cmess);
       function recurse(){
-        if(counter >= 0){
+        if(counter > 0){
         setTimeout(async()=>{
           counter -= 1 
           cmess = counter.toString()
