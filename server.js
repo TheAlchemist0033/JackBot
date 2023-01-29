@@ -31,7 +31,7 @@ const {
     createVerify
 } = require('crypto');
 const {
-    re
+    re, not
 } = require('mathjs');
 fs.readdir("./commands/", (err, folders) => {
     if (err) throw err;
@@ -178,7 +178,7 @@ client.on("messageCreate", async (message) => {
         // Find all bumps in the database that are older than 2 hours
         Bump.findOne({
             serverID: message.guildId,
-        }, (err, res) => {
+        }, async (err, res) => {
 
             if (err) return console.log(err);
             if (!res) return console.log("no results");
@@ -187,8 +187,10 @@ client.on("messageCreate", async (message) => {
  
                     res.notifyCooldown = new Date().getTime() + 180000
                     res.save().catch(err => console.log(err));
-                    message.channel.send('There are bumps that are older than 2 hours!');
-    
+                    notMess = await message.channel.send('There are bumps that are older than 2 hours!');
+                    setTimeout(()=>{
+                        notMess.delete()
+                    },10000)
             }
         });
     //  setInterval(checkBumpTime, 2 * 60 * 60 * 1000);
