@@ -43,6 +43,8 @@ module.exports = {
         [Call to action], and the product is priced at [product price] and currently [availability].`;
 
         // Send generated product description in Discord channel
-        message.channel.send(productDescription);
+        message.channel.send("desc logged");
+        console.log(productDescription);
+
     },
 };
