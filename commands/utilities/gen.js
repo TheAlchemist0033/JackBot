@@ -17,6 +17,13 @@ FG4060-3000 	3000 	185 x 250 	1 	1
 FG4060-5000 	5000 	223 x 290 	1 	1
 The description should highlight the product's unique selling points and how it stands out from competitor products. Emphasize the benefits of using 3.3 borosilicate glass flat bottom boiling flasks in the laboratory, and why it would be a valuable investment for laboratory professionals and amateurs alike.
 End the description with a call to action, encouraging the reader to learn more or make a purchase. Make sure to mention the product's price and availability.*/
+
+const pastebin = new PastebinAPI({
+    'api_dev_key': process.env.PASTEBIN_ACCESS_TOKEN,
+    'api_user_name': "TheAlchemist0033",
+    'api_user_password': process.env.PASTEBIN_PASSWORD
+  });
+  
 module.exports = {
     name: 'gen',
     description: 'generates product query for gpt',
@@ -43,7 +50,20 @@ module.exports = {
         [Call to action], and the product is priced at [product price] and currently [availability].`;
 
         // Send generated product description in Discord channel
-        message.channel.send("desc logged");
+        pastebin.createPaste({
+          'text': productDescription,
+          'title': `product desc: ${productName}`,
+          'format': null,
+          'privacy': 1
+        }, function (error, data) {
+          if (error) {
+            console.log(error);
+            message.reply('An error occurred while saving your content.');
+          } else {
+            message.reply(`Your content has been saved to Pastebin: ${data}`);
+          }
+        });
+        //message.channel.send("desc logged");
         console.log(productDescription);
 
     },
