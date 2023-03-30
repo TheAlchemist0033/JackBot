@@ -17,7 +17,7 @@ FG4060-3000 	3000 	185 x 250 	1 	1
 FG4060-5000 	5000 	223 x 290 	1 	1
 The description should highlight the product's unique selling points and how it stands out from competitor products. Emphasize the benefits of using 3.3 borosilicate glass flat bottom boiling flasks in the laboratory, and why it would be a valuable investment for laboratory professionals and amateurs alike.
 End the description with a call to action, encouraging the reader to learn more or make a purchase. Make sure to mention the product's price and availability.*/
-
+const PastebinAPI = require('pastebin-js');
 const pastebin = new PastebinAPI({
     'api_dev_key': process.env.PASTEBIN_ACCESS_TOKEN,
     'api_user_name': "TheAlchemist0033",
